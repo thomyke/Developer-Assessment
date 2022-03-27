@@ -1,0 +1,15 @@
+<template>
+    <lightning-quick-action-panel header={labHeader}>
+        <lightning-record-edit-form object-api-name={prodObj} onload={handleLoad}>
+            <template if:true={areDetailsVisible}>
+                <lightning-input-field field-name={skuField} data-field="StockKeepingUnit" value={inputValue} onchange={handleSubmit} required>
+                </lightning-input-field>
+            </template>     
+        </lightning-record-edit-form>
+        <div slot="footer" style="text-align: center;background-color: #f3f2f2;">
+            <div class="" style="padding: 12px 12px 12px 0px; margin-bottom: -8px;">
+                <lightning-button label=Submit title="Submit" onclick={validateAction}></lightning-button>
+            </div>
+        </div>
+    </lightning-quick-action-panel>   
+</template>
