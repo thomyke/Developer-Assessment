@@ -80,5 +80,4 @@ public with sharing class ProductAPI {
         }
     }
 
-    
 }
