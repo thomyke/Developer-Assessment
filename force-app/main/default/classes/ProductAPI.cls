@@ -79,5 +79,4 @@ public with sharing class ProductAPI {
             System.debug('Nothings to upsert');
         }
     }
-
 }
