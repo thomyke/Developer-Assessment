@@ -1,7 +1,7 @@
 @isTest
-global class ProductAPIHttpCalloutMock implements HttpCalloutMock {
+public class ProductAPIHttpCalloutMock implements HttpCalloutMock {
     // Implement this interface method
-    global HTTPResponse respond(HTTPRequest request) {
+    public HTTPResponse respond(HTTPRequest request) {
         // Create a fake response
         HttpResponse response = new HttpResponse();
         response.setHeader('Content-Type', 'application/json');

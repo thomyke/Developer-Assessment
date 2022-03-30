@@ -25,8 +25,8 @@ private class ProductAPITest {
 
         System.debug(response.getBody());
         String expectedValue = '[{"Name":"BALL NUT FEM-E-B 40X40RX6-3","SKU":"R150249063"},{"Name":"BALL NUT ZEM-E-S 16X5RX3-4","SKU":"R151201022"}]';
-        System.assertEquals(expectedValue, actualValue, 'Equal values  control');
-        System.assertEquals(200, response.getStatusCode(), 'StatusCode control');
+        System.assertEquals(expectedValue, actualValue, 'Equal values check');
+        System.assertEquals(200, response.getStatusCode(), 'StatusCode check');
         Test.stopTest();
     } 
 
@@ -55,8 +55,8 @@ private class ProductAPITest {
 
         System.debug(response.getBody());
         String expectedValue = '[{"Name":"BALL NUT FEM-E-B 40X40RX6-3", "SKU": "5656541"}]';
-        System.assertEquals(expectedValue, actualValue, 'Equal values  control');
-        System.assertEquals(502, response.getStatusCode(), 'StatusCode control');
+        System.assertEquals(expectedValue, actualValue, 'Equal values check');
+        System.assertEquals(502, response.getStatusCode(), 'StatusCode check');
         Test.stopTest();
     } 
 }

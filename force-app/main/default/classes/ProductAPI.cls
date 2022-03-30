@@ -15,6 +15,11 @@ public with sharing class ProductAPI {
         public String sku;
     }
 
+    /** 
+    * @description: Method create a new http object to send the request object.
+    * The response object is generated as a result of the request, if the result is correct,
+    * the data is processed using a parser, otherwise an error occurs.
+    */
     public static HttpResponse productSync() {
         Http http = new Http(); 
         HttpRequest request = new HttpRequest(); 
@@ -30,19 +35,44 @@ public with sharing class ProductAPI {
                         if (parser.getCurrentToken() == JSONToken.START_OBJECT) {
                             InnerClass innClass = (InnerClass)parser.readValueAs(InnerClass.class);
                             flagEqual = false;
-                            helpMethodSetList(innClass);
+                            handleUpsert(innClass);
                         }
                     }
                 }
             }
-            helpMethodUpsert();
+            upsertList();
         }else{
             System.debug('StatusCode error: ' + response.getStatusCode());
         }  
+
+        /*
+        try {
+            while (parser.nextToken() != null) {
+                if (parser.getCurrentToken() == JSONToken.START_ARRAY) {
+                    while (parser.nextToken() != null) {
+                        if (parser.getCurrentToken() == JSONToken.START_OBJECT) {
+                            InnerClass innClass = (InnerClass)parser.readValueAs(InnerClass.class);
+                            flagEqual = false;
+                            handleUpsert(innClass);
+                        }
+                    }
+                }
+            }
+            upsertList();
+        } catch (Exception e ) {
+            System.debug('Error: ' + e.getMessage());
+            System.debug('StatusCode error: ' + response.getStatusCode());
+        } 
+        */
         return response;  
     }
     
-    private static void helpMethodSetList(InnerClass innClass){
+     /** 
+    * @description: Method separates the data from the response for insert and update and put them together in one list.
+    * Input paramerer is InnerClass which represent the data from reponse.
+    * @param: InnerClass innClass
+    */
+    private static void handleUpsert(InnerClass innClass){
         
         for (Product2 product : mapProduct.values()) {
             if(product.StockKeepingUnit == innClass.SKU){
@@ -67,7 +97,10 @@ public with sharing class ProductAPI {
         }
     }
 
-    private static void helpMethodUpsert(){
+     /** 
+    * @description: Method upserts data if all permissions are valid.
+    */
+    private static void upsertList(){
         System.debug('UpserList: ' + upsertList);
         if(upsertList.size()> 0){
             if (Schema.sObjectType.Product2.isCreateable() && Schema.sObjectType.Product2.isUpdateable()) {
